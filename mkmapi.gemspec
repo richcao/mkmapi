@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
 
   gem.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec)/}) }
   gem.test_files    = `git ls-files -- test/*`.split("\n")
-  gem.name          = "Mkmapi"
+  gem.name          = "mkmapi"
   gem.require_paths = ["lib"]
   gem.version       = Mkmapi::VERSION
 
@@ -23,5 +23,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency      'rdoc'
   gem.add_development_dependency      'bundler'
   gem.add_development_dependency      'simplecov'
-  gem.add_development_dependency      'sidekiq'
 end
