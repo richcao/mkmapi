@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["arjen.brandenburgh@gmail.com"]
   gem.summary       = "Simple MagicCardMarket API v2.0 (MkmapiAPI) library for Ruby"
   gem.description   = "Simple MagicCardMarket API v2.0 (MkmapiAPI) library for Ruby"
-  gem.homepage      = "http://githib.com/cybey/mkmapi"
+  gem.homepage      = "http://github.com/arjenbrandenburgh/mkmapi"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec)/}) }
