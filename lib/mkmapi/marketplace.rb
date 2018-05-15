@@ -12,7 +12,7 @@ module Mkmapi
         data = Base64.decode64(json_data["priceguidefile"])
         gzip = Zlib::GzipReader.new(StringIO.new(data))
 
-        keys = ['id', 'average', 'low', 'trend', 'suggested', 'foil', 'foil_low', 'foil_trend' ]
+        keys = ['id', 'average', 'low', 'trend', 'german_low', 'suggested', 'foil', 'foil_low', 'foil_trend', 'low_ex' ]
         skip_first = gzip.readline # Skip the header
 
         CSV.parse(gzip.read).map do |a|
@@ -31,7 +31,7 @@ module Mkmapi
         data = Base64.decode64(json_data["productsfile"])
         gzip = Zlib::GzipReader.new(StringIO.new(data))
 
-        keys = ['id', 'name', 'category_id', 'category', 'expansion_id', 'metacard_id', 'date_added' ]
+        keys = ['id', 'name', 'category_id', 'category', 'expansion_id', 'date_added' ]
         skip_first = gzip.readline # Skip the header
 
         CSV.parse(gzip.read).map do |a|
