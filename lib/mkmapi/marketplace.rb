@@ -1,6 +1,6 @@
-require 'csv'
-require 'zlib'
-require 'stringio'
+require "csv"
+require "zlib"
+require "stringio"
 
 module Mkmapi
   class Marketplace < Struct.new(:agent)
@@ -12,7 +12,7 @@ module Mkmapi
         data = Base64.decode64(json_data["priceguidefile"])
         gzip = Zlib::GzipReader.new(StringIO.new(data))
 
-        keys = ['id', 'average', 'low', 'trend', 'german_low', 'suggested', 'foil', 'foil_low', 'foil_trend', 'low_ex' ]
+        keys = ["id", "average", "low", "trend", "german_low", "suggested", "foil", "foil_low", "foil_trend", "low_ex" ]
         skip_first = gzip.readline # Skip the header
 
         CSV.parse(gzip.read).map do |a|
@@ -31,7 +31,7 @@ module Mkmapi
         data = Base64.decode64(json_data["productsfile"])
         gzip = Zlib::GzipReader.new(StringIO.new(data))
 
-        keys = ['id', 'name', 'category_id', 'category', 'expansion_id', 'date_added' ]
+        keys = ["id", "name", "category_id", "category", "expansion_id", "date_added" ]
         skip_first = gzip.readline # Skip the header
 
         CSV.parse(gzip.read).map do |a|
@@ -46,8 +46,8 @@ module Mkmapi
     end
 
     def expansions(game_id = 1)
-      agent.get("games/#{game_id}/expansions")['expansion'].
-        each {|g| g['id'] = g.delete('idExpansion') }
+      agent.get("games/#{game_id}/expansions")["expansion"].
+        each {|g| g["id"] = g.delete("idExpansion") }
     end
 
     def singles(expansion_id = 1)
@@ -55,26 +55,13 @@ module Mkmapi
     end
 
     def games
-      agent.get("games")['game'].
-        each {|g| g['id'] = g.delete('idGame') }
+      agent.get("games")["game"].
+        each {|g| g["id"] = g.delete("idGame") }
     end
 
-    def card_by_name(name, game_id = 1, language_id = 1)
-      product(name, game_id, language_id, true)
+    def product(product_id)
+      agent.get("products/#{product_id}")["product"]
     end
-
-    def search(name, game_id = 1, language_id = 1)
-      product(name, game_id, language_id, false)
-    end
-
-    private
-
-      def product(name, game_id, language_id, search)
-        clean_name = URI.escape(name.gsub(/[^a-zA-Z0-9 ]/, '').downcase)
-        path = ["products", clean_name, game_id, language_id, search].join("/")
-
-        agent.get(path)['product']
-      end
 
   end
 end
