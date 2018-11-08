@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Mkmapi::VERSION
 
-  gem.add_dependency                  'faraday', '~> 0.11'
+  gem.add_dependency                  'faraday', '~> 0.11.0'
   gem.add_dependency                  'oj', '~> 2.18'
   gem.add_dependency                  'simple_oauth', '~> 0.3'
 
