@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Mkmapi::Session do
 
-  let(:connection) { double :connection, url_prefix: 'https://sandbox.mkmapi.eu/ws/v2.0/output.json' }
+  let(:connection) { double :connection, url_prefix: 'https://sandbox.cardmarket.com/ws/v2.0/output.json' }
   let(:agent) { double :agent }
 
   before :each do

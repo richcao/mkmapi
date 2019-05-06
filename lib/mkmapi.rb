@@ -12,7 +12,7 @@ module Mkmapi
   autoload :Account,      path['account']
   autoload :Marketplace,  path['marketplace']
 
-  def self.connect(url = 'https://www.mkmapi.eu/ws/v2.0')
+  def self.connect(url = 'https://api.cardmarket.com/ws/v2.0')
     @connection = Faraday.new url, ssl: { verify: false } do |faraday|
       # faraday.response :logger
       faraday.adapter Faraday.default_adapter
