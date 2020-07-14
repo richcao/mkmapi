@@ -8,7 +8,7 @@ You'll need an OAuth credentials for a dedicated app from Mkmapi.
 
 Use with bundler
 
-    gem 'mkmapi', github: 'cybey/mkmapi'
+    gem 'mkmapi', github: 'arjenbrandenburgh/mkmapi'
 
 Create a session
 

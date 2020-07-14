@@ -4,7 +4,6 @@ require "stringio"
 
 module Mkmapi
   class Marketplace < Struct.new(:agent)
-
     def priceguide
       json_data = agent.get("priceguide")
 
@@ -12,14 +11,14 @@ module Mkmapi
         data = Base64.decode64(json_data["priceguidefile"])
         gzip = Zlib::GzipReader.new(StringIO.new(data))
 
-        keys = ["id", "average", "low", "trend", "german_low", "suggested", "foil", "foil_low", "foil_trend", "low_ex" ]
+        keys = ["id", "average", "low", "trend", "german_low", "suggested", "foil", "foil_low", "foil_trend", "low_ex", "avg1", "avg7", "avg30", "foilavg1", "foilavg7", "foilavg30"]
         skip_first = gzip.readline # Skip the header
 
         CSV.parse(gzip.read).map do |a|
           item = keys.zip(a.map(&:to_f))
           item[0][1] = item[0][1].to_i
 
-          Hash[ item ]
+          Hash[item]
         end
       end
     end
@@ -31,7 +30,7 @@ module Mkmapi
         data = Base64.decode64(json_data["productsfile"])
         gzip = Zlib::GzipReader.new(StringIO.new(data))
 
-        keys = ["id", "name", "category_id", "category", "expansion_id", "date_added" ]
+        keys = ["id", "name", "category_id", "category", "expansion_id", "date_added"]
         skip_first = gzip.readline # Skip the header
 
         CSV.parse(gzip.read).map do |a|
@@ -40,14 +39,14 @@ module Mkmapi
           item[2][1] = item[2][1].to_i
           item[4][1] = item[4][1].to_i
           item[5][1] = item[5][1].to_i
-          Hash[ item ]
+          Hash[item]
         end
       end
     end
 
     def expansions(game_id = 1)
       agent.get("games/#{game_id}/expansions")["expansion"].
-        each {|g| g["id"] = g.delete("idExpansion") }
+        each { |g| g["id"] = g.delete("idExpansion") }
     end
 
     def singles(expansion_id = 1)
@@ -56,12 +55,11 @@ module Mkmapi
 
     def games
       agent.get("games")["game"].
-        each {|g| g["id"] = g.delete("idGame") }
+        each { |g| g["id"] = g.delete("idGame") }
     end
 
     def product(product_id)
       agent.get("products/#{product_id}")["product"]
     end
-
   end
 end
