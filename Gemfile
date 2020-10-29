@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "faraday", "~> 0.15.2"
+gem "faraday", "~> 1.1.0"
 gem "oj", "~> 2.18.3"
 gem "simple_oauth", "~> 0.3.1"
 
