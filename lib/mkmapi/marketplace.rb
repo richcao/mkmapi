@@ -5,8 +5,7 @@ require "stringio"
 module Mkmapi
   class Marketplace < Struct.new(:agent)
     def priceguide(game_id = 1)
-      # json_data = agent.get("priceguide", { "idGame" => game_id })
-      json_data = agent.get("priceguide")
+      json_data = agent.get("priceguide", { "idGame" => game_id })
 
       if (json_data && json_data["priceguidefile"])
         data = Base64.decode64(json_data["priceguidefile"])
